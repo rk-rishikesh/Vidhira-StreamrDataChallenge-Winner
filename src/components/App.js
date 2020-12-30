@@ -7,7 +7,6 @@ import Web3 from 'web3';
 import './App.css';
 
 
-
 let steno=0;
 let count=0;
 //Declare IPFS
