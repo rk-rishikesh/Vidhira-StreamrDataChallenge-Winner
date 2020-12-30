@@ -73,7 +73,7 @@ class App extends Component {
 
     const name = event.target.files[0].name;
     console.log(name)
-    var n = name.localeCompare('Output1.PNG');
+    var n = name.localeCompare('Output1.png');
     console.log(n);
     if (n == 0 ){
       //console.log("");
