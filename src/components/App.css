@@ -1,5 +1,5 @@
 body {
-  background-color: #ece1a0;
+  background-color: #ebf1f1;
   color: white;
   padding: 40px;
 }
@@ -9,7 +9,7 @@ from navbar img line
 <img src={photo} width="30" height="30" className="d-inline-block align-top" alt="" /> */
 
 #rcorners1 {
-  background: #ece1a0;
+  background: #c5b4ee;
   border-color: black;
   border-style: solid;
   width: 500px;
