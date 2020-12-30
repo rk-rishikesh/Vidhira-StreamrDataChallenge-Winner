@@ -1,4 +1,5 @@
 **The problem Vidhira solves**
+
 This application is helpful for the original creators like digital artists, sketch artists, memers etc on social media who want to showcase their creation without having the fear that will they get the credit for their creations or not if someone else on the social media tries to repost their work.
 
 Explanation:
@@ -7,4 +8,3 @@ Whenever a content creator posts his work a unique image ID is embedded into the
 Future Scope:
 The another feature our application would be able to provide is that it would be able to track the original user who have posted the image on the application. This would be highly helpful if any fake news is posted by any user, then the first user who posted the fake news would be tracked easily.
 
-![GitHub Logo](C:\Users\Rishikesh Kale\Desktop\Screeenshot1.png)
