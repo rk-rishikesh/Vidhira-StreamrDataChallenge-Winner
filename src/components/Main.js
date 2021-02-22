@@ -26,7 +26,7 @@ class Main extends Component {
                         type="text"
                         ref={(input) => { this.imageDescription = input }}
                         className="form-control"
-                        placeholder="About Image...."
+                        placeholder="Add Caption"
                         required />
                   </div>
                 <button type="submit" class="btn btn-primary btn-block btn-lg">Upload!</button>
@@ -36,6 +36,7 @@ class Main extends Component {
               <p>&nbsp;</p>
               <p>&nbsp;</p>
               <p>&nbsp;</p>
+              {/* Display Images */}
               <h1 class="text-info d-flex justify-content-center">THE WALL</h1>
               { this.props.images.map((image, key) => {
                 return(
@@ -52,6 +53,7 @@ class Main extends Component {
                     <ul id="imageList" className="list-group list-group-flush">
                       <li className="list-group-item">
                         <p class="text-center"><img src={`https://ipfs.infura.io/ipfs/${image.hash}`} style={{ maxWidth: '420px'}}/></p>
+                        {this.props.pushDataToStream(image.hash)}
                         <p class="text-dark font-italic">{image.description}</p>
                       </li>
                       <li key={key} className="list-group-item py-2">

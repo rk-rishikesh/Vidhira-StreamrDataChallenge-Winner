@@ -5,8 +5,7 @@ import Navbar from './Navbar'
 import Main from './Main'
 import Web3 from 'web3';
 import './App.css';
-
-
+import StreamrClient from 'streamr-client';
 
 let steno=0;
 let count=0;
@@ -14,7 +13,32 @@ let count=0;
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
 
+//const StreamrClient = require('streamr-client')
+      const SHARED_SECRET = 'LN7cuyS5TC2iItqeYxSBXwu9-IU2d1SO--MbCAnUz2vw'
+      const DU_CONTRACT = '0x96344ba422bfa9bb7bc34d42b8879b0443d3e430'
+      const STREAM_ID = '0xa6e731e2ae87325b88dd1fac402676a5e6624a9c/Vidhira'
+      
+      const userwallet = StreamrClient.generateEthereumAccount()
+      console.log(userwallet)
+
+      const streamr = new StreamrClient({
+        
+        url: 'wss://hack.streamr.network/api/v1/ws',
+        restUrl: 'https://hack.streamr.network/api/v1',
+        auth: {
+            privateKey: userwallet.privateKey,
+            provider: window.web3.currentProvider,
+        }
+      })
+      console.log(streamr)
+      
+      streamr.joinDataUnion(DU_CONTRACT, SHARED_SECRET)
+              .then((memberDetails) => {
+                console.log(memberDetails)
+              })
+
 class App extends Component {
+
 
   async componentWillMount() {
     await this.loadWeb3()
@@ -43,6 +67,10 @@ class App extends Component {
     const networkId = await web3.eth.net.getId()
     const networkData = Vidhira.networks[networkId]
     if(networkData) {
+      //Streamr-START
+      
+      //Streamr-END
+    
       const vidhira = new web3.eth.Contract(Vidhira.abi, networkData.address)
       this.setState({ vidhira })
       const imagesCount = await vidhira.methods.imageCount().call()
@@ -133,6 +161,14 @@ class App extends Component {
     
   }
 
+  pushDataToStream(userImage){
+    var dataPoint = {
+      'image' : userImage,
+    }
+
+    streamr.publish(STREAM_ID, dataPoint)
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -145,7 +181,10 @@ class App extends Component {
     this.uploadImage = this.uploadImage.bind(this)
     this.tipImageOwner = this.tipImageOwner.bind(this)
     this.captureFile = this.captureFile.bind(this)
+    this.pushDataToStream = this.pushDataToStream.bind(this)
   }
+
+
 
   render() {
     
@@ -159,6 +198,7 @@ class App extends Component {
               captureFile={this.captureFile}
               uploadImage={this.uploadImage}
               tipImageOwner={this.tipImageOwner}
+              pushDataToStream={this.pushDataToStream}
             />
         }
         
