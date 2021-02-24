@@ -1,11 +1,15 @@
 import Vidhira from '../abis/Vidhira.json'
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
-import Navbar from './Navbar'
 import Main from './Main'
 import Web3 from 'web3';
 import './App.css';
 import StreamrClient from 'streamr-client';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Navbar, Spinner} from 'react-bootstrap';
+import Profile from './Profile';
+import About from './About';
+
 
 let steno=0;
 let count=0;
@@ -14,8 +18,8 @@ const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
 
 
-      const SHARED_SECRET = 'LN7cuyS5TC2iItqeYxSBXwu9-IU2d1SO--MbCAnUz2vw'
-      const DU_CONTRACT = '0x96344ba422bfa9bb7bc34d42b8879b0443d3e430'
+      const SHARED_SECRET = '3on0wlioQE-86RoWybt_8AIUsgdphGQayfRhzosVP84w'
+      const DU_CONTRACT = '0x5cdabd6090f3039450fb803fd11e1e049ca277dd'
       const STREAM_ID = '0xa6e731e2ae87325b88dd1fac402676a5e6624a9c/Vidhira'
       
       const userwallet = StreamrClient.generateEthereumAccount()
@@ -81,6 +85,12 @@ class App extends Component {
         })
       }
       
+      streamr.getMemberStats(DU_CONTRACT, userwallet.address)
+                  .then((stats)=>{
+                    console.log(stats.earnings)
+                    this.setState({earnings: stats.earnings})
+                  })
+
       this.setState({ loading: false})
     } else {
       window.alert('Vidhira contract not deployed to detected network.')
@@ -93,14 +103,7 @@ class App extends Component {
     const file = event.target.files[0]
 
     const name = event.target.files[0].name;
-    console.log(name)
-    var n = name.localeCompare('Output1.png');
-    console.log(n);
-    if (n == 0 ){
-      //console.log("");
-      steno=1;
-    }
-    console.log("pehla",steno)
+
     const reader = new window.FileReader()
     reader.readAsArrayBuffer(file)
 
@@ -138,6 +141,8 @@ class App extends Component {
       {
         var dataPoint = {
           'image' : result[0].hash,
+          'caption': description,
+          'user address': this.state.account
         }
         console.log(result[0].hash)
         streamr.publish(STREAM_ID, dataPoint)
@@ -176,6 +181,7 @@ class App extends Component {
       images: [],
       loading: true,
       flag: false,
+      earnings:0
     }
 
     this.uploadImage = this.uploadImage.bind(this)
@@ -189,18 +195,70 @@ class App extends Component {
     
     return (
       <div>
-        <Navbar account={this.state.account} />
-        { this.state.loading
-          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main
-              images={this.state.images}
-              captureFile={this.captureFile}
-              uploadImage={this.uploadImage}
-              tipImageOwner={this.tipImageOwner}
-            />
-        }
+      {/* <Navbar account={this.state.account} /> */}
+      { this.state.loading
+        ? <div id="loader" className="text-center mt-5">
+          <div class="spinner-grow text-muted"></div>
+          <div class="spinner-grow text-primary"></div>
+          <div class="spinner-grow text-success"></div>
+          <div class="spinner-grow text-info"></div>
+          <div class="spinner-grow text-warning"></div>
+          <div class="spinner-grow text-danger"></div>
+          <div class="spinner-grow text-secondary"></div>
+          <div class="spinner-grow text-dark"></div>
+          <div class="spinner-grow text-light"></div>
+          </div>
+        : <div>
+          <Router>
+                  <div>
+                    <Navbar style={{backgroundColor: "#1b2333"}}>
+
+                    <ul className="navbar-nav px-3">
+                    <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
+                      
+                      { this.state.account
+                        ? <img
+                          className='ml-2'
+                          width='30'
+                          height='30'
+                          src={`data:image/png;base64,${new Identicon(this.state.account, 30).toString()}`}
+                        />
+                        : <span></span>
+                      }
+                      <small className="text-secondary" style={{marginLeft:"10%", fontSize:"80%"}}>
+                        <small style={{fontSize:"110%", color:"white"}}>{this.state.account}</small>
+                      </small>
+                    </li>
+                    </ul>
+
+                    <h4 class="font-italic" style={{marginLeft:"20%"}}>Vidhira</h4>
+                    <ul className="navbar-nav mr-auto" style={{paddingLeft:"27%"}}>
+                    <li><Link to={'/main'} className="nav-link" style={{fontFamily:"sans-serif",  color:"white"}}>Feed</Link></li>
+                    <li><Link to={'/profile'} className="nav-link" style={{fontFamily:"sans-serif",  color:"white"}}>My Profile</Link></li>
+                    <li><Link to={'/about'} className="nav-link" style={{fontFamily:"sans-serif",  color:"white"}}>About Us</Link></li>                        
+                    </ul>
+                    </Navbar>
+                    
+                    <Switch>
+                        <Route path='/profile' render={(props) => <Profile account = {this.state.account}
+                                                                           earning = {this.state.earnings}
+                                                                           images={this.state.images} {...props}/>}/>
+
+                        <Route path="/main" render={(props) => <Main images={this.state.images}
+                                                                     captureFile={this.captureFile}
+                                                                     uploadImage={this.uploadImage}
+                                                                    tipImageOwner={this.tipImageOwner}
+                        />}/>
+                        <Route path='/about' component={About} />
+                    </Switch>
+                  </div>
+                  
+                </Router>
         
-      </div>
+        </div>
+      }
+      
+    </div>
       
     );
   }

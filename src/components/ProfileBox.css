@@ -1,0 +1,16 @@
+.ProfileBox{
+    background-color: #29364e;
+    height: 10%;
+    background-image: radial-gradient(red);
+    background-position: right bottom, left top;
+    background-repeat: no-repeat, repeat;
+    padding: 15px;
+}
+
+
+
+.Cards{
+    margin-top: 10%;
+    margin-left: 2%;
+    margin-right: 2%;
+}

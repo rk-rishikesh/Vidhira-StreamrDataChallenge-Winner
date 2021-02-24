@@ -1,5 +1,5 @@
 body {
-  background-color: #ebf1f1;
+  background-color: rgb(239, 240, 241);
   color: white;
   padding: 40px;
 }
@@ -9,26 +9,14 @@ from navbar img line
 <img src={photo} width="30" height="30" className="d-inline-block align-top" alt="" /> */
 
 #rcorners1 {
-  background: #c5b4ee;
-  border-color: black;
+  background: rgb(47, 47, 59);
   border-style: solid;
   width: 500px;
-  border-radius: 25px;
+  border-radius: 15px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 5px;
   box-shadow: 0px 2px 15px;
-}
-
-
-.button {
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-background-color: rgb(247, 242, 242);
-color: rgb(160, 131, 131);
-border: none;
 }
 
 .button1 {
