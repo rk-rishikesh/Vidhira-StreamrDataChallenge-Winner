@@ -56,7 +56,9 @@ class Main extends Component {
                       <li className="list-group-item">
                         <p class="text-center"><img src={`https://ipfs.infura.io/ipfs/${image.hash}`} style={{ maxWidth: '420px'}}/></p>
                         
+                        <p class="text-dark">Post ID: {image.id}</p>
                         <p class="text-dark font-italic">{image.description}</p>
+                        
                       </li>
                       <li key={key} className="list-group-item py-2">
                         <small className="float-left mt-1 text-muted">
