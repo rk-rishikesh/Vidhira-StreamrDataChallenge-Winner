@@ -14,8 +14,10 @@
 
 <h1></h1>
 <h1 align="center">Meet the Team</h1>
+<p align="center">
+    ![Screenshot 2021-05-12 194823](https://user-images.githubusercontent.com/59107121/117991729-f3e1f600-b35b-11eb-9bb2-3c5644e9cc58.png)
+</p>
 
-![Screenshot 2021-05-12 194823](https://user-images.githubusercontent.com/59107121/117991729-f3e1f600-b35b-11eb-9bb2-3c5644e9cc58.png)
 
 
 ![0fe05e9b-48db-45e7-b809-8e78c8697c69](https://user-images.githubusercontent.com/59107121/117991843-0c521080-b35c-11eb-93c6-5db02545297a.jpg)
