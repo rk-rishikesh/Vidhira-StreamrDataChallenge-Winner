@@ -14,7 +14,7 @@
 
 <h1></h1>
 <h1 align="center">Meet the Team</h1>
-<br></br>
+
 ![Screenshot 2021-05-12 194823](https://user-images.githubusercontent.com/59107121/117991729-f3e1f600-b35b-11eb-9bb2-3c5644e9cc58.png)
 
 
