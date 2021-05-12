@@ -3,7 +3,7 @@
 
 ![Screenshot 2021-05-12 194421](https://user-images.githubusercontent.com/59107121/117991254-803fe900-b35b-11eb-9339-ad079f4b7c7e.png)
 
-
+<h1></h1>
 <h1 align="center">What are the problems and How Vidhira address them !</h1>
 
 <br></br>
@@ -12,8 +12,9 @@
 
 ![Screenshot 2021-05-12 194558](https://user-images.githubusercontent.com/59107121/117991721-f2183280-b35b-11eb-9abd-5d7bbdd13340.png)
 
+<h1></h1>
 <h1 align="center">Meet the Team</h1>
-
+<br></br>
 ![Screenshot 2021-05-12 194823](https://user-images.githubusercontent.com/59107121/117991729-f3e1f600-b35b-11eb-9bb2-3c5644e9cc58.png)
 
 
